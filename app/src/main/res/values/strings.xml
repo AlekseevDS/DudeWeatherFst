@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DudeWeatherFst</string>
+    <string name="logo">Погода в вашем городе</string>
+    <string name="hint_user_field">Введите название города</string>
+    <string name="main_btn">УЗНАТЬ ПОГОДУ</string>
+    <string name="result_text"></string>
+</resources>
