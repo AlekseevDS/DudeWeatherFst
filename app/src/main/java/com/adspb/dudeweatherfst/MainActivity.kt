@@ -33,23 +33,20 @@ class MainActivity : AppCompatActivity() {
         main_btn?.setOnClickListener {
             if (user_field?.text?.toString()?.trim()?.equals("")!!)
                 Toast.makeText(this, "Введите город", Toast.LENGTH_LONG).show()
-            //Показать пуш 3 сек
+
+            //Показать toast 3 сек
             else {
                 val city: String = user_field?.text.toString() //create var and declarate text
                 val key: String = "a011aeb88485bdc0e73f33da6007a535"
-                val url: String = "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$key"
+                val url: String = "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$key&units=metric&lang=ru"
 
                 doAsync {
                     val apiResponse = URL(url).readText() //считать весь текст полученный по ссылке
                     Log.d("INFO", apiResponse) //для тестирования в консоли можно посмотреть что присвоилось
+                    //result_info?.text = "Температура: $apiResponse" //проверка вывода до разборки JSON
 
-                    val weather = JSONObject(apiResponse).getJSONArray("weather")
-                    val description = weather.getJSONObject(0).getString("description")
-
-                    val main = JSONObject(apiResponse).getJSONArray("main")
-                    val temp = main.getJSONObject(0).getString("temp")
-
-                    result_info?.text = "Температура: $temp\n$description" //вызывает аннотацию @SuppressLint - лучше не использовать
+                    val temp = JSONObject(apiResponse).getJSONObject("main").getString("temp")
+                    result_info?.text = "Температура: $temp" //вызывает аннотацию @SuppressLint - лучше не использовать
 
                 }
 
